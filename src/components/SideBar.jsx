@@ -1,40 +1,38 @@
 import React from "react";
 import { IonIcon } from "@ionic/react";
-import { homeOutline, peopleOutline, cartOutline } from 'ionicons/icons'; // Import the icons
+import { homeOutline, peopleOutline, cartOutline, chatbubbleOutline, helpOutline, settingsOutline, lockClosedOutline, logOutOutline } from 'ionicons/icons'; // Import all necessary icons
 import "./styles/styles.css"; 
 
 const Sidebar = ({ setActiveSection, sidebarActive, setSidebarActive }) => {
+  //sidebar items as an array of objects
+  const sidebarItems = [
+    { icon: homeOutline, title: "Dashboard", section: "dashboard" },
+    { icon: peopleOutline, title: "Customers", section: "customers" },
+    { icon: cartOutline, title: "Orders", section: "orders" },
+    { icon: chatbubbleOutline, title: "Messages", section: "messages" },
+    { icon: helpOutline, title: "Help", section: "help" },
+    { icon: settingsOutline, title: "Settings", section: "settings" },
+    { icon: lockClosedOutline, title: "Password", section: "password" },
+    { icon: logOutOutline, title: "Sign Out", section: "signOut" },
+  ];
+
   return (
     <div className={`navigation ${sidebarActive ? "active" : ""}`}>
       <ul>
         <li>
           <span className="title">JOVINES ELECTRONICS</span>
         </li>
-        <li>
-          <a href="#" onClick={() => setActiveSection("dashboard")}>
-            <span className="icon">
-              <IonIcon icon={homeOutline} />
-            </span>
-            <span className="title">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" onClick={() => setActiveSection("customers")}>
-            <span className="icon">
-              <IonIcon icon={peopleOutline} />
-            </span>
-            <span className="title">Customers</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" onClick={() => setActiveSection("orders")}>
-            <span className="icon">
-              <IonIcon icon={cartOutline} />
-            </span>
-            <span className="title">Orders</span>
-          </a>
-        </li>
-        {/* Add other sidebar links as necessary */}
+        {/* Dynamically render sidebar items */}
+        {sidebarItems.map((item, index) => (
+          <li key={index}>
+            <a href="#" onClick={() => setActiveSection(item.section)}>
+              <span className="icon">
+                <IonIcon icon={item.icon} />
+              </span>
+              <span className="title">{item.title}</span>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   );
